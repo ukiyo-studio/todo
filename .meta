@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "todo-ui": "https://github.com/carl-ukiyo-studio/todo-ui.git",
+    "todo-api": "https://github.com/carl-ukiyo-studio/todo-api.git"
+  }
+}

@@ -1,0 +1,37 @@
+version: '3'
+services:
+  mysql:
+    image: "mysql:8.0.30"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "admin"
+      MYSQL_USER: "test"
+      MYSQL_PASSWORD: "password"
+      MYSQL_DATABASE: "tododb"
+  todo-api:
+    image: todoapi
+    build:
+      context: todo-api
+      dockerfile: ./Dockerfile-dev
+    environment:
+      NODE_ENV: development
+    ports:
+      - 3000:3000
+    container_name: todo-api
+    volumes:
+      - ./todo-api:/app/todo-api
+    depends_on:
+      - mysql
+  todo-ui:
+    image: todoui
+    build:
+      context: todo-ui
+      dockerfile: ./Dockerfile-dev
+    environment:
+      NODE_ENV: development
+    ports:
+      - 4200:4200
+    container_name: todo-ui
+    volumes:
+      - ./todo-ui:/app/todo-ui
